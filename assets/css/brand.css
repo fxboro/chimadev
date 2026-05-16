@@ -4,7 +4,7 @@
    ═══════════════════════════════════════════════════════════════ */
 
 /* ── Google Fonts ── */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Outfit:wght@100..900&display=swap');
 
 /* ── CSS Custom Properties ── */
 :root {
@@ -54,7 +54,7 @@ html {
 }
 
 body {
-  font-family: 'JetBrains Mono', monospace !important;
+  font-family: 'Outfit', sans-serif !important;
   background-color: var(--bg-primary) !important;
   color: var(--text-primary) !important;
   line-height: 1.6;
@@ -90,7 +90,7 @@ h3 {
 }
 
 p, li, span, a, label, select, option, button, input, textarea {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Outfit', sans-serif;
 }
 
 /* Code & Mono Elements */
@@ -370,7 +370,9 @@ button.bg-cyan-400:hover {
    ══════════════════════════════════ */
 .rounded-2xl.border,
 .rounded-xl.border {
-  background: linear-gradient(145deg, rgba(26, 27, 58, 0.8), rgba(18, 19, 46, 0.6)) !important;
+  background: linear-gradient(145deg, rgba(26, 27, 58, 0.4), rgba(18, 19, 46, 0.3)) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-color: rgba(123, 63, 242, 0.18) !important;
   transition: all var(--transition-smooth);
 }

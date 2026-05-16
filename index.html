@@ -7,17 +7,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
     content="Web design, app development, AI automation, and workflow optimization for small businesses, solo entrepreneurs, and influencers." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Chima",
+    "url": "https://chima.dev",
+    "jobTitle": "Web Developer & AI Automation Specialist",
+    "description": "Expert in web design, AI automation, and workflow optimization for small businesses.",
+    "knowsAbout": ["Web Development", "AI Automation", "Workflow Optimization", "Python", "JavaScript", "Stripe Integration"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Services",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Design & Redesign" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "App Development" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Automation & Chatbots" } }
+      ]
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do you only work with techies?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not at all. Most of my clients are small business owners and influencers who just want their tech to work."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How fast can you build my site?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Simple sites can be ready in 2-3 weeks. Complex apps + automation take longer, but I keep you updated every step of the way."
+        }
+      }
+    ]
+  }
+  </script>
   <audio id="typing-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-soft-fast-typing-2584.mp3"></audio>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="brand.css" />
-  <!-- Inline favicon to avoid /favicon.ico 404 during local dev -->
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/brand.css" />
+  <!-- SEO / Social Sharing -->
+  <meta property="og:title" content="Chima | Web Developer & AI Automation Specialist" />
+  <meta property="og:description" content="I design, build, and automate digital experiences that save businesses from drowning in busywork." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://chima.dev" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Chima | AI Automation Expert" />
+  
+  <!-- Favicon -->
   <link rel="icon"
     href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=" />
 </head>
 
-<body class="bg-slate-950 text-slate-100 font-mono">
+<body class="bg-slate-950 text-slate-100 font-mono overflow-x-hidden">
+  <!-- Interactive Mouse Glow -->
+  <div id="mouse-glow" class="fixed pointer-events-none z-[-1] w-[600px] h-[600px] rounded-full blur-[120px] opacity-20 bg-gradient-to-tr from-cyan-400 to-violet-400 translate-x-[-50%] translate-y-[-50%] hidden md:block"></div>
+  
   <!-- Navbar -->
   <header class="sticky top-0 z-30 bg-slate-950/80 backdrop-blur border-b border-slate-800">
     <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
@@ -100,7 +155,7 @@
             Software • AI automation • Workflow optimization
           </p>
           <h1 class="text-3xl md:text-5xl font-semibold tracking-tight text-slate-50 mb-4">
-            Software that hustle harder<br class="hidden md:block" /> than you do.
+            Software that hustles harder<br class="hidden md:block" /> than you do.
           </h1>
           <p class="text-slate-300 text-base md:text-lg mb-6 max-w-xl">
             I design, build, and automate digital experiences that save small businesses, influencers, and solo hustlers
@@ -625,11 +680,11 @@
             </div>
             <div>
               <h4 class="font-semibold text-slate-100 mb-1">The Outcome</h4>
-              <p>
-                Manual data entry dropped by <span class="text-emerald-400 font-semibold">80%</span>, bookings increased
-                by <span class="text-emerald-400 font-semibold">30%</span>, and the owner saved <span
-                  class="text-emerald-400 font-semibold">10+ hours per week</span>.
-              </p>
+              <div class="flex flex-wrap gap-2 mt-2">
+                <span class="px-3 py-1 rounded-full bg-emerald-400/10 border border-emerald-400/30 text-emerald-400 text-[10px] font-bold uppercase tracking-wider">80% Manual Task Reduction</span>
+                <span class="px-3 py-1 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-400 text-[10px] font-bold uppercase tracking-wider">30% Booking Increase</span>
+                <span class="px-3 py-1 rounded-full bg-violet-400/10 border border-violet-400/30 text-violet-400 text-[10px] font-bold uppercase tracking-wider">10+ Hours Saved / Week</span>
+              </div>
             </div>
           </div>
           <p class="mt-3 text-xs text-slate-400 italic">
@@ -660,11 +715,11 @@
             </div>
             <div>
               <h4 class="font-semibold text-slate-100 mb-1">The Outcome</h4>
-              <p>
-                DM response time dropped by <span class="text-emerald-400 font-semibold">70%</span>, she secured <span
-                  class="text-emerald-400 font-semibold">5 new brand deals</span> in a month, and freed up <span
-                  class="text-emerald-400 font-semibold">15+ hours per week</span> for content creation.
-              </p>
+              <div class="flex flex-wrap gap-2 mt-2">
+                <span class="px-3 py-1 rounded-full bg-rose-400/10 border border-rose-400/30 text-rose-400 text-[10px] font-bold uppercase tracking-wider">70% Response Time Cut</span>
+                <span class="px-3 py-1 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-400 text-[10px] font-bold uppercase tracking-wider">5+ New Brand Deals</span>
+                <span class="px-3 py-1 rounded-full bg-emerald-400/10 border border-emerald-400/30 text-emerald-400 text-[10px] font-bold uppercase tracking-wider">15+ Hours Freed / Week</span>
+              </div>
             </div>
           </div>
           <p class="mt-3 text-xs text-slate-400 italic">
@@ -914,11 +969,10 @@
               <a href="mailto:hallo@chimadev.com" aria-label="Email Chima"
                 class="inline-flex items-center group mr-2 align-middle">
                 <span
-                  class="w-6 h-6 rounded-full bg-slate-800/30 flex items-center justify-center transition-colors group-hover:bg-cyan-400/10 align-middle">
-                  <svg class="w-3 h-3 text-slate-300 group-hover:text-cyan-300 align-middle" fill="currentColor"
-                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path d="M2.94 6.22A2 2 0 014 5h12a2 2 0 011.06.22l-7.06 4.7L2.94 6.22z" />
-                    <path d="M18 8.56V14a2 2 0 01-2 2H4a2 2 0 01-2-2V8.56l7.07 4.7a3 3 0 003.86 0L18 8.56z" />
+                  class="w-8 h-8 rounded-full bg-slate-800/30 flex items-center justify-center transition-all duration-300 group-hover:bg-cyan-400/10 group-hover:shadow-[0_0_10px_rgba(34,211,238,0.2)] align-middle">
+                  <svg class="w-4 h-4 text-slate-300 group-hover:text-cyan-300 transition-colors align-middle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="16" x="2" y="4" rx="2"/>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
                   </svg>
                 </span>
               </a>
@@ -928,11 +982,11 @@
               <a href="https://www.linkedin.com/in/chima-oladayo-ohiagbaji/" target="_blank" rel="noopener"
                 aria-label="Chima on LinkedIn" class="inline-flex items-center group mr-2 align-middle">
                 <span
-                  class="w-6 h-6 rounded-full bg-slate-800/30 flex items-center justify-center transition-colors group-hover:bg-cyan-400/10 align-middle">
-                  <svg class="w-3 h-3 text-slate-300 group-hover:text-cyan-300 align-middle" viewBox="0 0 24 24"
-                    fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path
-                      d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 24h4V7h-4v17zM8.5 7v17h4V14.5c0-3 4-3.25 4 0V24h4V13c0-6-6.5-5.8-8-2.8V7h-4z" />
+                  class="w-8 h-8 rounded-full bg-slate-800/30 flex items-center justify-center transition-all duration-300 group-hover:bg-cyan-400/10 group-hover:shadow-[0_0_10px_rgba(34,211,238,0.2)] align-middle">
+                  <svg class="w-4 h-4 text-slate-300 group-hover:text-cyan-300 transition-colors align-middle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                    <rect width="4" height="12" x="2" y="9"/>
+                    <circle cx="4" cy="4" r="2"/>
                   </svg>
                 </span>
               </a>
@@ -942,11 +996,11 @@
               <a href="https://www.instagram.com/fxboro_1948/" target="_blank" rel="noopener"
                 aria-label="Chima on Instagram" class="inline-flex items-center group mr-2 align-middle">
                 <span
-                  class="w-6 h-6 rounded-full bg-slate-800/30 flex items-center justify-center transition-colors group-hover:bg-cyan-400/10 align-middle">
-                  <svg class="w-3 h-3 text-slate-300 group-hover:text-cyan-300 align-middle" viewBox="0 0 24 24"
-                    fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path
-                      d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.9.3 2.3.5.6.3 1 .7 1.4 1.4.2.4.4 1.1.5 2.3.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.9-.5 2.3-.3.6-.7 1-1.4 1.4-.4.2-1.1.4-2.3.5-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.9-.3-2.3-.5-.6-.3-1-.7-1.4-1.4-.2-.4-.4-1.1-.5-2.3C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.9.5-2.3.3-.6.7-1 1.4-1.4.4-.2 1.1-.4 2.3-.5C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3 0-3.3 0-4.5.1-1 .1-1.6.2-1.9.4-.5.2-.8.5-1.1 1-.2.3-.4.9-.4 1.9-.1 1.2-.1 1.5-.1 4.5s0 3.3.1 4.5c.1 1 .2 1.6.4 1.9.2.5.5.8 1 1.1.3.2.9.4 1.9.4 1.2.1 1.5.1 4.5.1s3.3 0 4.5-.1c1-.1 1.6-.2 1.9-.4.5-.2.8-.5 1.1-1 .2-.3.4-.9.4-1.9.1-1.2.1-1.5.1-4.5s0-3.3-.1-4.5c-.1-1-.2-1.6-.4-1.9-.2-.5-.5-.8-1-1.1-.3-.2-.9-.4-1.9-.4-1.2-.1-1.5-.1-4.5-.1zM12 7.4a4.6 4.6 0 110 9.2 4.6 4.6 0 010-9.2zm0 1.8a2.8 2.8 0 100 5.6 2.8 2.8 0 000-5.6zM17.8 6.2a1.1 1.1 0 11-2.2 0 1.1 1.1 0 012.2 0z" />
+                  class="w-8 h-8 rounded-full bg-slate-800/30 flex items-center justify-center transition-all duration-300 group-hover:bg-cyan-400/10 group-hover:shadow-[0_0_10px_rgba(34,211,238,0.2)] align-middle">
+                  <svg class="w-4 h-4 text-slate-300 group-hover:text-cyan-300 transition-colors align-middle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
                   </svg>
                 </span>
               </a>
@@ -1009,9 +1063,7 @@
     </div>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+
 
   <!-- Floating Chatbot Widget -->
   <div id="chatbot-widget" class="fixed bottom-6 right-6 z-50">
@@ -1064,369 +1116,28 @@
 
     </div>
   </div>
-  <script>
-    const chatWindow = document.getElementById("chat-window");
-    const chatInput = document.getElementById("chat-input");
-    const chatSend = document.getElementById("chat-send");
-    const botMode = document.getElementById("bot-mode");
-    const botAvatar = document.getElementById("bot-avatar");
-    const toggleBtn = document.getElementById("chatbot-toggle");
-    const closeBtn = document.getElementById("chatbot-close");
-    const chatWidget = document.getElementById("chatbot-window");
-    const voiceBtn = document.getElementById("voice-btn");
 
-    /* -----------------------------
-       CHAT HISTORY PERSISTENCE
-    ----------------------------- */
-    function saveHistory() {
-      localStorage.setItem("chatHistory", chatWindow.innerHTML);
-    }
-    function loadHistory() {
-      const history = localStorage.getItem("chatHistory");
-      if (history) chatWindow.innerHTML = history;
-    }
-    loadHistory();
+  <!-- Cookie Consent Banner -->
+  <div id="cookie-banner" class="fixed bottom-0 left-0 w-full z-[60] transform translate-y-full transition-transform duration-500 bg-slate-900 border-t border-slate-800 shadow-[0_-10px_30px_-15px_rgba(0,0,0,0.5)]">
+    <div class="max-w-6xl mx-auto px-4 py-4 md:py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="text-sm text-slate-300">
+        <p>
+          We use cookies and similar technologies to enhance your experience, analyze traffic, and personalize content. 
+          <a href="#" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2">Privacy Policy</a>.
+        </p>
+      </div>
+      <div class="flex items-center gap-3 w-full md:w-auto shrink-0">
+        <button id="cookie-reject" class="flex-1 md:flex-none px-4 py-2 rounded-lg border border-slate-700 text-slate-300 text-sm font-semibold hover:bg-slate-800 transition">
+          Decline
+        </button>
+        <button id="cookie-accept" class="flex-1 md:flex-none px-4 py-2 rounded-lg bg-cyan-400 text-slate-950 text-sm font-semibold hover:bg-cyan-300 transition">
+          Accept All
+        </button>
+      </div>
+    </div>
+  </div>
 
-    /* -----------------------------
-       TIMESTAMP
-    ----------------------------- */
-    function timestamp() {
-      const now = new Date();
-      return now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-    }
-
-    /* -----------------------------
-       ADD MESSAGE
-    ----------------------------- */
-    function addMessage(text, sender = "bot") {
-      const bubble = document.createElement("div");
-      bubble.className = "flex items-start gap-2";
-
-      const avatar = document.createElement("div");
-      avatar.className =
-        sender === "bot"
-          ? botAvatar.className
-          : "w-6 h-6 rounded-full bg-emerald-400";
-
-      const wrapper = document.createElement("div");
-      wrapper.className = "bg-slate-800 px-3 py-2 rounded-lg max-w-[80%]";
-
-      const msg = document.createElement("div");
-      msg.textContent = text;
-
-      const time = document.createElement("div");
-      time.className = "text-[10px] text-slate-400 mt-1";
-      time.textContent = timestamp();
-
-      wrapper.appendChild(msg);
-      wrapper.appendChild(time);
-      bubble.appendChild(avatar);
-      bubble.appendChild(wrapper);
-      chatWindow.appendChild(bubble);
-
-      chatWindow.scrollTop = chatWindow.scrollHeight;
-      saveHistory();
-    }
-
-    /* -----------------------------
-       TYPING INDICATOR
-    ----------------------------- */
-    function showTyping() {
-      playTypingSound();
-      const typingInterval = setInterval(playTypingSound, 500);
-      const typing = document.createElement("div");
-      typing.id = "typing-indicator";
-      typing.className = "flex items-start gap-2";
-
-      const avatar = document.createElement("div");
-      avatar.className = botAvatar.className;
-
-      const dots = document.createElement("div");
-      dots.className =
-        "bg-slate-800 px-3 py-2 rounded-lg text-slate-300 text-xs";
-      dots.innerHTML = `
-      <span class="animate-pulse">●</span>
-      <span class="animate-pulse delay-150">●</span>
-      <span class="animate-pulse delay-300">●</span>
-    `;
-
-      typing.appendChild(avatar);
-      typing.appendChild(dots);
-      chatWindow.appendChild(typing);
-      chatWindow.scrollTop = chatWindow.scrollHeight;
-    }
-
-    function hideTyping() {
-      clearInterval(typingInterval);
-      const t = document.getElementById("typing-indicator");
-      if (t) t.remove();
-    }
-
-    /* -----------------------------
-       PERSONALITY MODES + AVATARS
-    ----------------------------- */
-    const personalities = {
-      fun: {
-        avatar: "w-8 h-8 rounded-full bg-cyan-400",
-        greet: "Hey hey! Ready to automate your chaos?",
-        automate: "I automate everything except your love life. That one’s still in beta.",
-        joke: "Why did the developer go broke? Because he used up all his cache.",
-        website: "Websites that sparkle, convert, and never ghost your customers.",
-        ai: "AI is my superpower. I use it to fight boring tasks and bad workflows.",
-        savings: "Money talks! Check out the ROI calculator on this page to see how much we can save you.",
-        default: "Ooooh interesting. Tell me more, human friend."
-      },
-      professional: {
-        avatar: "w-8 h-8 rounded-full bg-blue-400",
-        greet: "Hello. How can I support your workflow or automation needs today?",
-        automate: "I can streamline bookings, emails, reporting, and operational workflows efficiently.",
-        joke: "Debugging is like being a detective in a crime movie where you are also the murderer.",
-        website: "I build clean, responsive, conversion-focused websites tailored to your business goals.",
-        ai: "AI is a powerful tool for reducing manual workload and improving operational efficiency.",
-        savings: "Operational efficiency leads to direct cost savings. I recommend using our specialized ROI calculator below to estimate your potential annual recovery.",
-        default: "I understand. Could you provide more details so I can assist effectively?"
-      },
-      sarcastic: {
-        avatar: "w-8 h-8 rounded-full bg-rose-400",
-        greet: "Oh great, another human. What chaos are we fixing today?",
-        automate: "Sure, I’ll automate your tasks. Your procrastination, however, is out of scope.",
-        joke: "A joke? Your current workflow is already hilarious.",
-        website: "Yes, I build websites. No, they won’t fix your bad WiFi.",
-        ai: "AI is amazing. It even pretends to listen better than most people.",
-        savings: "Ah, looking for the bottom line? Scroll down to the ROI calculator. It'll show you exactly how much money is currently leaking out of your business.",
-        default: "Fascinating. Truly. Go on, I’m riveted."
-      }
-    };
-
-    function updateAvatar() {
-      botAvatar.className = personalities[botMode.value].avatar;
-    }
-    botMode.addEventListener("change", updateAvatar);
-    updateAvatar();
-
-    /* -----------------------------
-       BOT REPLY LOGIC
-    ----------------------------- */
-    function botReply(text) {
-      const mode = personalities[botMode.value];
-      const t = text.toLowerCase();
-
-      if (t.includes("hello") || t.includes("hi")) return mode.greet;
-      if (t.includes("automate")) return mode.automate;
-      if (t.includes("joke")) return mode.joke;
-      if (t.includes("website")) return mode.website;
-      if (t.includes("ai")) return mode.ai;
-      if (t.includes("savings") || t.includes("roi") || t.includes("money") || t.includes("cost")) return mode.savings;
-
-      return mode.default;
-    }
-
-    /* -----------------------------
-       SEND MESSAGE
-    ----------------------------- */
-    function sendMessage() {
-      const text = chatInput.value.trim();
-      if (!text) return;
-
-      addMessage(text, "user");
-      chatInput.value = "";
-
-      showTyping();
-      setTimeout(() => {
-        hideTyping();
-        addMessage(botReply(text), "bot");
-      }, 1200);
-    }
-
-    chatSend.addEventListener("click", sendMessage);
-    chatInput.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") sendMessage();
-    });
-
-    /* -----------------------------
-       VOICE INPUT
-    ----------------------------- */
-    const SpeechRecognition =
-      window.SpeechRecognition || window.webkitSpeechRecognition;
-
-    if (SpeechRecognition) {
-      const recognition = new SpeechRecognition();
-      recognition.lang = "en-US";
-
-      voiceBtn.addEventListener("click", () => {
-        voiceBtn.textContent = "🎙️";
-        recognition.start();
-      });
-
-      recognition.onresult = (e) => {
-        const transcript = e.results[0][0].transcript;
-        chatInput.value = transcript;
-        voiceBtn.textContent = "🎤";
-      };
-
-      recognition.onend = () => {
-        voiceBtn.textContent = "🎤";
-      };
-    }
-
-    /* -----------------------------
-       FLOATING WIDGET TOGGLE
-    ----------------------------- */
-    toggleBtn.addEventListener("click", () => {
-      chatWidget.classList.toggle("hidden");
-    });
-
-    closeBtn.addEventListener("click", () => {
-      chatWidget.classList.add("hidden");
-    });
-  </script>
-
-  <script>
-
-
-    const typingSound = document.getElementById("typing-sound");
-
-
-    function playTypingSound() {
-      typingSound.currentTime = 0;
-      typingSound.play();
-    }
-
-    // ROI Calculator Logic
-    const hoursInput = document.getElementById('manual-hours');
-    const rateInput = document.getElementById('hourly-rate');
-    const hoursVal = document.getElementById('hours-val');
-    const annualLossText = document.getElementById('annual-loss');
-    const weeksLostElem = document.getElementById('weeks-lost');
-
-    function calculateROI() {
-      if (!hoursInput || !rateInput || !hoursVal || !annualLossText || !weeksLostElem) return;
-
-      const hours = parseInt(hoursInput.value);
-      const rate = parseInt(rateInput.value) || 0;
-
-      hoursVal.textContent = hours + (hours >= 40 ? 'h+' : 'h');
-
-      const yearlyLoss = hours * rate * 52;
-      annualLossText.textContent = yearlyLoss.toLocaleString();
-
-      const totalHoursYear = hours * 52;
-      const weeksLost = Math.round(totalHoursYear / 40);
-      weeksLostElem.textContent = weeksLost;
-    }
-
-    if (hoursInput && rateInput) {
-      hoursInput.addEventListener('input', calculateROI);
-      rateInput.addEventListener('input', calculateROI);
-      calculateROI();
-    }
-
-    // SheetDB Form Submission
-    const contactForm = document.getElementById('contact-form');
-    const formStatus = document.getElementById('form-status');
-    const submitBtn = document.getElementById('submit-btn');
-
-    if (contactForm) {
-      contactForm.addEventListener('submit', e => {
-        e.preventDefault();
-
-        // Visual feedback
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
-        formStatus.classList.remove('hidden', 'text-rose-400', 'text-emerald-400');
-        formStatus.classList.add('text-cyan-400');
-        formStatus.textContent = 'Processing your request...';
-
-        const formData = new FormData(contactForm);
-        const data = Object.fromEntries(formData.entries());
-
-        // Add a timestamp
-        data.date = new Date().toLocaleString();
-
-        fetch('https://sheetdb.io/api/v1/8h250m0bvd2qo', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ data: [data] }),
-        })
-          .then(response => {
-            if (response.ok) {
-              formStatus.textContent = 'Message sent! I’ll get back to you soon.';
-              formStatus.classList.replace('text-cyan-400', 'text-emerald-400');
-              contactForm.reset();
-              calculateROI(); // Reset ROI display if needed
-            } else {
-              throw new Error('Form submission failed');
-            }
-          })
-          .catch(error => {
-            console.error('Error:', error);
-            formStatus.textContent = 'Oops! Something went wrong. Please try again.';
-            formStatus.classList.replace('text-cyan-400', 'text-rose-400');
-          })
-          .finally(() => {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Send message';
-            setTimeout(() => {
-              formStatus.classList.add('hidden');
-            }, 5000);
-          });
-      });
-    }
-
-    /* -----------------------------
-       HERO DASHBOARD ANIMATION
-    ----------------------------- */
-    const dashTime = document.getElementById('dash-time');
-    const dashTasks = document.getElementById('dash-tasks');
-    const dashBookings = document.getElementById('dash-bookings');
-    const dashProgress = document.getElementById('dash-progress');
-    const dashLoad = document.getElementById('dash-load');
-
-    if (dashTime && dashTasks && dashBookings) {
-      // Internal state
-      let stats = { time: 0, tasks: 0, bookings: 0 };
-      const targets = { time: 10, tasks: 80, bookings: 30 };
-
-      // Initial count-up
-      const animateCount = () => {
-        const speed = 0.05;
-        let animated = false;
-
-        Object.keys(targets).forEach(key => {
-          if (stats[key] < targets[key]) {
-            stats[key] = Math.min(targets[key], stats[key] + targets[key] * speed);
-            animated = true;
-          }
-        });
-
-        dashTime.textContent = Math.floor(stats.time);
-        dashTasks.textContent = Math.floor(stats.tasks);
-        dashBookings.textContent = Math.floor(stats.bookings);
-
-        if (animated) requestAnimationFrame(animateCount);
-      };
-
-      animateCount();
-
-      // Live fluctuations
-      setInterval(() => {
-        // Progress bar wiggle
-        dashProgress.style.width = (20 + Math.random() * 60) + '%';
-
-        // Load fluctuation
-        dashLoad.textContent = `CPU: ${Math.floor(10 + Math.random() * 20)}%`;
-
-        // Small stat bumps
-        if (Math.random() > 0.8) {
-          dashTime.classList.add('scale-110', 'text-white');
-          setTimeout(() => dashTime.classList.remove('scale-110', 'text-white'), 500);
-        }
-      }, 3000);
-    }
-  </script>
-  <script src="scripts.js"></script>
+  <script src="assets/js/scripts.js"></script>
 </body>
 
 </html>

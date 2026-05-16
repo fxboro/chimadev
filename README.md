@@ -64,9 +64,14 @@ Once the server is running, navigate to `http://127.0.0.1:8080` in your browser.
 
 ```text
 ├── index.html       # Main application entry point
-├── brand.css        # Custom brand overrides and typography
-├── style.css        # Core design system and Tailwind builds
-├── scripts.js       # Dynamic UI interactions and dashboard simulations
+├── assets/          # Static assets directory
+│   ├── css/
+│   │   ├── brand.css # Custom brand overrides and typography
+│   │   └── style.css # Core design system and Tailwind builds
+│   └── js/
+│       └── scripts.js # Dynamic UI interactions and dashboard simulations
+├── design.md        # Design system architecture and UI/UX overview
+├── sitemap.md       # Map of the website's structure
 ├── BRAND_GUIDE.md   # Unified brand identity and guidelines
 └── README.md        # Project documentation
 ```
