@@ -46,6 +46,12 @@
   --transition-smooth: 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ── Missing Tailwind Utilities ── */
+@media (min-width: 768px) {
+  .md\:hidden { display: none !important; }
+  .md\:inline { display: inline !important; }
+}
+
 /* ══════════════════════════════════
    BASE RESETS / BODY
    ══════════════════════════════════ */
@@ -798,6 +804,495 @@ header.border-b {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE-FIRST RESPONSIVE OPTIMIZATIONS
+   Targets: < 768px (phones only)
+   Goal: Reduce scroll depth, improve information density,
+         follow mobile UX best practices.
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 767px) {
+
+  /* ── Global Mobile Spacing ── */
+  /* Reduce generous section padding on mobile */
+  section .py-16,
+  section.py-16,
+  .py-16 {
+    padding-top: 2.5rem !important;
+    padding-bottom: 2.5rem !important;
+  }
+
+  /* Reduce section header bottom margins */
+  section .mb-10 {
+    margin-bottom: 1.5rem !important;
+  }
+
+  section .mb-12 {
+    margin-bottom: 1.5rem !important;
+  }
+
+  section .gap-12 {
+    gap: 1.5rem !important;
+  }
+
+  section .gap-10 {
+    gap: 1.25rem !important;
+  }
+
+  /* ── Scroll margin for anchor links (fix navbar overlap) ── */
+  section[id] {
+    scroll-margin-top: 70px;
+  }
+
+  /* ── HERO SECTION ── */
+  #hero .py-20 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+
+  #hero h1 {
+    font-size: clamp(1.75rem, 6vw, 2.25rem) !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  #hero .mb-6 {
+    margin-bottom: 1rem !important;
+  }
+
+  /* Make CTA buttons stack nicely */
+  #hero .flex-wrap {
+    gap: 0.5rem !important;
+  }
+
+  #hero .flex-wrap a {
+    font-size: 0.8125rem !important;
+    padding: 0.625rem 1rem !important;
+  }
+
+  /* Dashboard preview card — make more compact */
+  #hero .shadow-xl {
+    padding: 1rem !important;
+  }
+
+  #hero .shadow-xl .mb-4 {
+    margin-bottom: 0.5rem !important;
+  }
+
+  #hero .rounded-xl.p-3 {
+    padding: 0.5rem !important;
+  }
+
+  #hero .text-2xl {
+    font-size: 1.25rem !important;
+  }
+
+  /* ── ABOUT SECTION ── */
+  #about h2 {
+    font-size: clamp(1.5rem, 5vw, 2rem) !important;
+  }
+
+  #about .mb-4 {
+    margin-bottom: 0.5rem !important;
+  }
+
+  #about .space-y-4 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0.5rem !important;
+  }
+
+  /* Core Skills & Who I Work With cards — compact */
+  #about .p-4.rounded-xl {
+    padding: 0.75rem !important;
+  }
+
+  /* ── TECH STACK — 2x2 CAROUSEL ── */
+  #tech-stack-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: repeat(2, 1fr) !important;
+    gap: 0.5rem !important;
+    overflow: hidden !important;
+    max-height: 180px !important;
+    position: relative;
+  }
+
+  /* Hide all cards beyond the first 4 visible ones */
+  #tech-stack-grid > div {
+    min-height: 0 !important;
+  }
+
+
+
+  /* Compact tech stack card sizing */
+  #tech-stack-grid > div {
+    padding: 0.5rem !important;
+    gap: 0.25rem !important;
+  }
+
+  #tech-stack-grid > div svg,
+  #tech-stack-grid > div .w-8 {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  #tech-stack-grid > div span {
+    font-size: 0.6875rem !important;
+  }
+
+  /* Tech stack carousel navigation dots */
+  .tech-carousel-nav {
+    display: flex !important;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 0.75rem;
+  }
+
+  .tech-carousel-dot {
+    width: 8px !important;
+    height: 8px !important;
+    border-radius: 50% !important;
+    background: rgba(123, 63, 242, 0.3) !important;
+    border: none !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+    transition: all var(--transition-fast);
+  }
+
+  .tech-carousel-dot.active {
+    background: var(--neon-cyan) !important;
+    box-shadow: 0 0 8px rgba(0, 229, 255, 0.4) !important;
+    width: 20px !important;
+    border-radius: 4px !important;
+  }
+
+  /* ── SERVICES SECTION — 2-column grid ── */
+  #services h2 {
+    font-size: clamp(1.35rem, 5vw, 1.75rem) !important;
+  }
+
+  #services .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+
+  #services .p-6 {
+    padding: 0.75rem !important;
+  }
+
+  /* Smaller service card icons */
+  #services .w-10 {
+    width: 2rem !important;
+    height: 2rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #services .w-10 svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  #services h3 {
+    font-size: 0.8125rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  #services .text-sm {
+    font-size: 0.6875rem !important;
+    line-height: 1.4 !important;
+  }
+
+  /* ── PROCESS SECTION — 2x2 grid ── */
+  #process h2 {
+    font-size: clamp(1.35rem, 5vw, 1.75rem) !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #process .text-center.mb-12 {
+    margin-bottom: 1rem !important;
+  }
+
+  #process .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+
+  #process .p-6 {
+    padding: 0.75rem !important;
+  }
+
+  #process .w-12 {
+    width: 2rem !important;
+    height: 2rem !important;
+    font-size: 0.75rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #process h3 {
+    font-size: 0.8125rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  #process .text-xs {
+    font-size: 0.6875rem !important;
+    line-height: 1.4 !important;
+  }
+
+  /* ── CASE STUDIES — Horizontal carousel ── */
+  #case-studies h2 {
+    font-size: clamp(1.35rem, 5vw, 1.75rem) !important;
+  }
+
+  #case-studies .space-y-8 {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 0.75rem !important;
+    padding-bottom: 1rem !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  #case-studies .space-y-8::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Remove vertical spacing between case study cards */
+  #case-studies .space-y-8 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0 !important;
+  }
+
+  #case-studies article {
+    flex: 0 0 85vw !important;
+    scroll-snap-align: center !important;
+    padding: 1rem !important;
+  }
+
+  #case-studies article h3 {
+    font-size: 0.875rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  #case-studies .grid.md\:grid-cols-3 {
+    grid-template-columns: 1fr !important;
+    gap: 0.5rem !important;
+  }
+
+  #case-studies h4 {
+    font-size: 0.75rem !important;
+  }
+
+  #case-studies .text-sm {
+    font-size: 0.75rem !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Outcome badges — smaller */
+  #case-studies .rounded-full {
+    font-size: 9px !important;
+    padding: 2px 6px !important;
+  }
+
+  /* Case studies scroll indicator */
+  .case-studies-scroll-hint {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.6875rem;
+  }
+
+  .case-studies-scroll-hint svg {
+    animation: swipeHint 1.5s ease-in-out infinite;
+  }
+
+  @keyframes swipeHint {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(6px); }
+  }
+
+  /* ── TESTIMONIALS — Horizontal scroll ── */
+  #testimonials h2 {
+    font-size: clamp(1.35rem, 5vw, 1.75rem) !important;
+  }
+
+  #testimonials .grid {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 0.5rem !important;
+    padding-bottom: 0.75rem !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  #testimonials .grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  #testimonials .p-5 {
+    flex: 0 0 82vw !important;
+    scroll-snap-align: center !important;
+    padding: 0.75rem !important;
+  }
+
+  #testimonials .text-sm {
+    font-size: 0.8125rem !important;
+  }
+
+  /* ── FAQ — Accordion style ── */
+  #faq h2 {
+    font-size: clamp(1.35rem, 5vw, 1.75rem) !important;
+  }
+
+  #faq .grid {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+
+  #faq .space-y-4 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0 !important;
+  }
+
+  /* FAQ cards become compact accordion items */
+  #faq .p-5.rounded-2xl {
+    padding: 0.75rem 1rem !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-default) !important;
+    border-top: none !important;
+  }
+
+  #faq .space-y-4 > div:first-child .p-5.rounded-2xl {
+    border-top: 1px solid var(--border-default) !important;
+  }
+
+  /* FAQ answer text — collapsed by default via JS */
+  #faq .p-5.rounded-2xl .text-sm {
+    font-size: 0.8125rem !important;
+    line-height: 1.5 !important;
+  }
+
+  /* FAQ accordion toggle icon */
+  .faq-toggle-icon {
+    display: inline-flex !important;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--neon-cyan);
+    transition: transform var(--transition-smooth);
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+  .faq-item.open .faq-toggle-icon {
+    transform: rotate(45deg);
+  }
+
+  /* FAQ answers — collapsed/expanded */
+  .faq-answer {
+    max-height: 0 !important;
+    overflow: hidden !important;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.25s ease;
+    opacity: 0;
+  }
+
+  .faq-item.open .faq-answer {
+    max-height: 300px !important;
+    opacity: 1;
+  }
+
+  /* FAQ question headers — clickable */
+  .faq-question {
+    cursor: pointer;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  /* ── ROI CALCULATOR ── */
+  #roi-calculator h2 {
+    font-size: clamp(1.35rem, 5vw, 1.75rem) !important;
+  }
+
+  #roi-calculator .p-8 {
+    padding: 1rem !important;
+  }
+
+  #roi-calculator .rounded-3xl {
+    padding: 1rem !important;
+  }
+
+  #roi-calculator .text-4xl {
+    font-size: 2rem !important;
+  }
+
+  /* ── CONTACT SECTION ── */
+  #contact h2 {
+    font-size: clamp(1.35rem, 5vw, 1.75rem) !important;
+  }
+
+  #contact .gap-10 {
+    gap: 1rem !important;
+  }
+
+  /* Make long URLs wrap */
+  #contact .space-y-2 p {
+    word-break: break-all;
+    font-size: 0.75rem !important;
+  }
+
+  #contact .p-5 {
+    padding: 0.75rem !important;
+  }
+
+  /* ── CHATBOT WIDGET ── */
+  #chatbot-widget {
+    bottom: 1rem !important;
+    right: 1rem !important;
+  }
+
+  #chatbot-toggle {
+    width: 3rem !important;
+    height: 3rem !important;
+    font-size: 1.25rem !important;
+  }
+
+  #chatbot-window {
+    width: calc(100vw - 2rem) !important;
+    height: 400px !important;
+    position: fixed !important;
+    bottom: 4.5rem !important;
+    right: 1rem !important;
+  }
+
+  /* ── COOKIE BANNER ── */
+  #cookie-banner .text-sm {
+    font-size: 0.75rem !important;
+  }
+
+  #cookie-banner .gap-4 {
+    gap: 0.5rem !important;
+  }
+
+  #cookie-banner .py-4 {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+  }
+
+  /* ── FOOTER ── */
+  footer .py-6 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
   }
 }
 

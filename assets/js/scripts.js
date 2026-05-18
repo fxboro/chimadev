@@ -138,6 +138,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function runShuffle() {
+      // Skip shuffle on mobile — the mobile carousel handles card visibility
+      if (window.matchMedia('(max-width: 767px)').matches) return;
+
       const cards = Array.from(grid.children);
       if (cards.length < 2) return; // nothing to shuffle
 
@@ -650,4 +653,160 @@ Instructions:
       cookieBanner.classList.add('translate-y-full');
     });
   }
+
+  // ═══════════════════════════════════════════════════════════
+  // MOBILE-ONLY INTERACTIVE FEATURES
+  // Only activate on viewports < 768px
+  // ═══════════════════════════════════════════════════════════
+  const isMobile = window.matchMedia('(max-width: 767px)');
+
+  function initMobileFeatures() {
+    if (!isMobile.matches) return;
+
+    // ── Tech Stack Carousel (2x2 pages) ──
+    const techGrid = document.getElementById('tech-stack-grid');
+    const carouselNav = document.querySelector('.tech-carousel-nav');
+
+    if (techGrid && carouselNav) {
+      const allCards = Array.from(techGrid.children);
+      const CARDS_PER_PAGE = 4;
+      const totalPages = Math.ceil(allCards.length / CARDS_PER_PAGE);
+      let currentPage = 0;
+
+      // Show nav dots
+      carouselNav.style.display = 'flex';
+
+      // Generate correct number of dots
+      carouselNav.innerHTML = '';
+      for (let i = 0; i < totalPages; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'tech-carousel-dot' + (i === 0 ? ' active' : '');
+        dot.dataset.page = i;
+        dot.setAttribute('aria-label', `Page ${i + 1}`);
+        carouselNav.appendChild(dot);
+      }
+
+      function showPage(page) {
+        currentPage = page;
+        allCards.forEach((card, idx) => {
+          const cardPage = Math.floor(idx / CARDS_PER_PAGE);
+          card.style.display = cardPage === page ? '' : 'none';
+        });
+
+        // Update dots
+        carouselNav.querySelectorAll('.tech-carousel-dot').forEach((dot, i) => {
+          dot.classList.toggle('active', i === page);
+        });
+      }
+
+      // Show first page
+      showPage(0);
+
+      // Dot click handlers
+      carouselNav.addEventListener('click', (e) => {
+        const dot = e.target.closest('.tech-carousel-dot');
+        if (!dot) return;
+        showPage(parseInt(dot.dataset.page));
+      });
+
+      // Auto-cycle every 5 seconds
+      let carouselInterval = setInterval(() => {
+        showPage((currentPage + 1) % totalPages);
+      }, 5000);
+
+      // Pause on interaction
+      carouselNav.addEventListener('pointerdown', () => {
+        clearInterval(carouselInterval);
+        // Resume after 10s
+        setTimeout(() => {
+          carouselInterval = setInterval(() => {
+            showPage((currentPage + 1) % totalPages);
+          }, 5000);
+        }, 10000);
+      });
+
+      // Swipe support for tech stack
+      let touchStartX = 0;
+      techGrid.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+      techGrid.addEventListener('touchend', (e) => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 40) {
+          clearInterval(carouselInterval);
+          if (diff > 0 && currentPage < totalPages - 1) showPage(currentPage + 1);
+          else if (diff < 0 && currentPage > 0) showPage(currentPage - 1);
+        }
+      }, { passive: true });
+    }
+
+    // ── FAQ Accordions ──
+    const faqItems = document.querySelectorAll('.faq-item');
+    if (faqItems.length > 0) {
+      // Show toggle icons on mobile
+      document.querySelectorAll('.faq-toggle-icon').forEach(icon => {
+        icon.style.display = '';
+      });
+
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        if (!question) return;
+
+        question.addEventListener('click', () => {
+          const wasOpen = item.classList.contains('open');
+
+          // Close all other items (accordion behavior)
+          faqItems.forEach(other => other.classList.remove('open'));
+
+          // Toggle current
+          if (!wasOpen) {
+            item.classList.add('open');
+          }
+        });
+      });
+    }
+
+    // ── Case Studies Swipe Hint ──
+    const swipeHint = document.querySelector('.case-studies-scroll-hint');
+    if (swipeHint) {
+      swipeHint.style.display = '';
+
+      // Hide hint after first swipe
+      const caseContainer = document.querySelector('#case-studies .space-y-8');
+      if (caseContainer) {
+        caseContainer.addEventListener('scroll', () => {
+          swipeHint.style.display = 'none';
+        }, { once: true });
+      }
+    }
+  }
+
+  // Initialize mobile features
+  initMobileFeatures();
+
+  // Re-check on resize (handles orientation changes)
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (isMobile.matches) {
+        initMobileFeatures();
+      } else {
+        // Reset mobile-specific states on larger viewports
+        document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('open'));
+        document.querySelectorAll('.faq-toggle-icon').forEach(icon => icon.style.display = 'none');
+
+        const techGrid = document.getElementById('tech-stack-grid');
+        if (techGrid) {
+          Array.from(techGrid.children).forEach(card => card.style.display = '');
+        }
+
+        const carouselNav = document.querySelector('.tech-carousel-nav');
+        if (carouselNav) carouselNav.style.display = 'none';
+
+        const swipeHint = document.querySelector('.case-studies-scroll-hint');
+        if (swipeHint) swipeHint.style.display = 'none';
+      }
+    }, 200);
+  });
 });

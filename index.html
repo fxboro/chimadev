@@ -430,7 +430,13 @@
               </div>
 
             </div>
-
+            <!-- Mobile carousel navigation dots -->
+            <div class="tech-carousel-nav" style="display:none;">
+              <button class="tech-carousel-dot active" data-page="0" aria-label="Page 1"></button>
+              <button class="tech-carousel-dot" data-page="1" aria-label="Page 2"></button>
+              <button class="tech-carousel-dot" data-page="2" aria-label="Page 3"></button>
+              <button class="tech-carousel-dot" data-page="3" aria-label="Page 4"></button>
+            </div>
           </div>
           <div class="p-4 rounded-xl border border-slate-800 bg-slate-900/60">
             <h3 class="text-sm font-semibold text-slate-100 mb-2">Who I Work With</h3>
@@ -795,6 +801,11 @@
           </p>
         </article>
       </div>
+      <!-- Mobile swipe hint -->
+      <div class="case-studies-scroll-hint" style="display:none;">
+        <span>Swipe for more</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
     </div>
   </section>
 
@@ -856,23 +867,23 @@
 
       <div class="grid md:grid-cols-2 gap-8 items-start">
         <div class="space-y-4">
-          <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-cyan-400/40 transition">
-            <h3 class="font-semibold text-slate-100 mb-2">Do you only work with techies?</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
+          <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-cyan-400/40 transition faq-item">
+            <h3 class="font-semibold text-slate-100 mb-2 faq-question">Do you only work with techies?<span class="faq-toggle-icon" style="display:none;">+</span></h3>
+            <p class="text-sm text-slate-300 leading-relaxed faq-answer">
               Not at all. Most of my clients are small business owners and influencers who just want their tech to <span
                 class="italic text-cyan-400">work</span>.
             </p>
           </div>
-          <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-emerald-400/40 transition">
-            <h3 class="font-semibold text-slate-100 mb-2">How fast can you build my site?</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
+          <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-emerald-400/40 transition faq-item">
+            <h3 class="font-semibold text-slate-100 mb-2 faq-question">How fast can you build my site?<span class="faq-toggle-icon" style="display:none;">+</span></h3>
+            <p class="text-sm text-slate-300 leading-relaxed faq-answer">
               Simple sites can be ready in 2-3 weeks. Complex apps + automation take longer, but I keep you updated
               every step of the way.
             </p>
           </div>
-          <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-sky-400/40 transition">
-            <h3 class="font-semibold text-slate-100 mb-2">Will AI replace me?</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
+          <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-sky-400/40 transition faq-item">
+            <h3 class="font-semibold text-slate-100 mb-2 faq-question">Will AI replace me?<span class="faq-toggle-icon" style="display:none;">+</span></h3>
+            <p class="text-sm text-slate-300 leading-relaxed faq-answer">
               Nope. AI is here to <span class="italic">assist</span>. I use it to handle the boring stuff so you can
               focus on being human.
             </p>
@@ -880,23 +891,23 @@
         </div>
 
         <div class="space-y-4">
-          <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-violet-400/40 transition">
-            <h3 class="font-semibold text-slate-100 mb-2">Is this going to cost me a fortune?</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
+          <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-violet-400/40 transition faq-item">
+            <h3 class="font-semibold text-slate-100 mb-2 faq-question">Is this going to cost me a fortune?<span class="faq-toggle-icon" style="display:none;">+</span></h3>
+            <p class="text-sm text-slate-300 leading-relaxed faq-answer">
               I tailor solutions to fit small business budgets. No enterprise-only sticker shock here—just value for
               your sanity.
             </p>
           </div>
-          <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-rose-400/40 transition">
-            <h3 class="font-semibold text-slate-100 mb-2">Can you make my brand look cooler?</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
+          <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-rose-400/40 transition faq-item">
+            <h3 class="font-semibold text-slate-100 mb-2 faq-question">Can you make my brand look cooler?<span class="faq-toggle-icon" style="display:none;">+</span></h3>
+            <p class="text-sm text-slate-300 leading-relaxed faq-answer">
               Absolutely. Sleek redesigns are my bread and butter. I'll make sure you look sharp enough to impress
               competitors.
             </p>
           </div>
-          <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-cyan-400/40 transition">
-            <h3 class="font-semibold text-slate-100 mb-2">What happens after launch?</h3>
-            <p class="text-sm text-slate-300 leading-relaxed">
+          <div class="p-5 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-cyan-400/40 transition faq-item">
+            <h3 class="font-semibold text-slate-100 mb-2 faq-question">What happens after launch?<span class="faq-toggle-icon" style="display:none;">+</span></h3>
+            <p class="text-sm text-slate-300 leading-relaxed faq-answer">
               I don’t just vanish. I offer ongoing support and optimization so your site keeps evolving with your
               business.
             </p>
@@ -990,7 +1001,7 @@
                   </svg>
                 </span>
               </a>
-              https://www.linkedin.com/in/chima-oladayo-ohiagbaji/
+              <span class="hidden md:inline">https://www.linkedin.com/in/chima-oladayo-ohiagbaji/</span><span class="md:hidden">LinkedIn Profile</span>
             </p>
             <p>
               <a href="https://www.instagram.com/fxboro_1948/" target="_blank" rel="noopener"
