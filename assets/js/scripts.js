@@ -253,11 +253,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function saveHistory() {
       localStorage.setItem("chatHistory", chatWindow.innerHTML);
     }
-    function loadHistory() {
-      const history = localStorage.getItem("chatHistory");
-      if (history) chatWindow.innerHTML = history;
-    }
-    loadHistory();
 
     function timestamp() {
       const now = new Date();
@@ -294,18 +289,8 @@ document.addEventListener('DOMContentLoaded', () => {
       saveHistory();
     }
 
-    const typingSound = document.getElementById("typing-sound");
-    function playTypingSound() {
-      if (typingSound) {
-        typingSound.currentTime = 0;
-        typingSound.play().catch(e => console.warn('Audio play blocked:', e));
-      }
-    }
-
     let typingInterval;
     function showTyping() {
-      playTypingSound();
-      typingInterval = setInterval(playTypingSound, 500);
       const typing = document.createElement("div");
       typing.id = "typing-indicator";
       typing.className = "flex items-start gap-2";
@@ -329,7 +314,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function hideTyping() {
-      clearInterval(typingInterval);
       const t = document.getElementById("typing-indicator");
       if (t) t.remove();
     }
@@ -370,8 +354,31 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateAvatar() {
       botAvatar.className = personalities[botMode.value].avatar;
     }
-    botMode.addEventListener("change", updateAvatar);
+
+    function loadHistory() {
+      const history = localStorage.getItem("chatHistory");
+      if (history) {
+        chatWindow.innerHTML = history;
+      } else {
+        addMessage(personalities[botMode.value].greet, "bot");
+      }
+    }
+
+    botMode.addEventListener("change", () => {
+      updateAvatar();
+      const history = localStorage.getItem("chatHistory");
+      // If chat is empty or contains only a single greeting message from the bot, replace it
+      if (!history || chatWindow.children.length <= 1) {
+        chatWindow.innerHTML = "";
+        addMessage(personalities[botMode.value].greet, "bot");
+      } else {
+        // Otherwise, notify the user of the tone switch
+        addMessage(`[Switched to ${botMode.value.toUpperCase()} mode] ${personalities[botMode.value].greet}`, "bot");
+      }
+    });
+
     updateAvatar();
+    loadHistory();
 
     // The API key has been moved to the backend server (.env -> GEMINI_API_KEY)
     // for security. The frontend now communicates via the /api/chat proxy.
