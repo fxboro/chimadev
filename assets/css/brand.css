@@ -64,6 +64,7 @@ body {
   background-color: var(--bg-primary) !important;
   color: var(--text-primary) !important;
   line-height: 1.6;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -693,9 +694,16 @@ header.border-b {
    LAYOUT REFINEMENTS
    ═══════════════════════════════════════ */
 
-/* Hero wider container */
+/* Scroll offset for all sections — accounts for sticky navbar */
+section[id] {
+  scroll-margin-top: 72px;
+}
+
+/* Hero wider container — smooth transition via padding */
 #hero .max-w-6xl {
   max-width: 1440px !important;
+  padding-left: var(--space-lg) !important;
+  padding-right: var(--space-lg) !important;
 }
 
 /* Content sections */
@@ -706,14 +714,82 @@ header.border-b {
 #faq .max-w-6xl,
 #contact .max-w-6xl {
   max-width: 1200px !important;
+  padding-left: var(--space-lg) !important;
+  padding-right: var(--space-lg) !important;
 }
 
-/* Generous vertical spacing on larger viewports */
-@media (min-width: 768px) {
-  section .py-16 {
+/* ── Section Vertical Rhythm ── */
+/* Base (mobile): 48px top/bottom */
+section > div[class*="py-16"],
+section > div[class*="py-20"] {
+  padding-top: var(--space-2xl) !important;
+  padding-bottom: var(--space-2xl) !important;
+}
+
+/* Desktop: 96px top/bottom */
+@media (min-width: 1025px) {
+  section > div[class*="py-16"],
+  section > div[class*="py-20"] {
     padding-top: var(--space-4xl) !important;
     padding-bottom: var(--space-4xl) !important;
   }
+}
+
+/* ── Section Header Margins ── */
+section .mb-10 {
+  margin-bottom: var(--space-lg) !important;
+}
+
+section .mb-12 {
+  margin-bottom: var(--space-lg) !important;
+}
+
+@media (min-width: 1025px) {
+  section .mb-10 {
+    margin-bottom: var(--space-xl) !important;
+  }
+
+  section .mb-12 {
+    margin-bottom: var(--space-2xl) !important;
+  }
+}
+
+/* ── Hero Spacing Polish ── */
+#hero h1 {
+  margin-bottom: var(--space-lg) !important;
+}
+
+#hero .text-base,
+#hero .text-lg {
+  margin-bottom: var(--space-xl) !important;
+}
+
+@media (min-width: 1025px) {
+  #hero > div > div {
+    padding-top: var(--space-3xl) !important;
+    padding-bottom: var(--space-3xl) !important;
+  }
+}
+
+/* ── About Section Text Hierarchy ── */
+#about p {
+  margin-bottom: var(--space-md) !important;
+  line-height: 1.7 !important;
+}
+
+#about p:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* ── Contact Section Balance ── */
+#contact > div > div.grid {
+  align-items: start;
+}
+
+#contact .space-y-2 p {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
 }
 
 
@@ -818,23 +894,6 @@ header.border-b {
 @media (max-width: 767px) {
 
   /* ── Global Mobile Spacing ── */
-  /* Reduce generous section padding on mobile */
-  section .py-16,
-  section.py-16,
-  .py-16 {
-    padding-top: 2.5rem !important;
-    padding-bottom: 2.5rem !important;
-  }
-
-  /* Reduce section header bottom margins */
-  section .mb-10 {
-    margin-bottom: 1.5rem !important;
-  }
-
-  section .mb-12 {
-    margin-bottom: 1.5rem !important;
-  }
-
   section .gap-12 {
     gap: 1.5rem !important;
   }
@@ -843,37 +902,28 @@ header.border-b {
     gap: 1.25rem !important;
   }
 
-  /* ── Scroll margin for anchor links (fix navbar overlap) ── */
-  section[id] {
-    scroll-margin-top: 70px;
-  }
-
   /* ── HERO SECTION ── */
-  #hero .py-20 {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
-  }
-
   #hero h1 {
     font-size: clamp(1.75rem, 6vw, 2.25rem) !important;
-    margin-bottom: 0.75rem !important;
+    margin-bottom: var(--space-md) !important;
   }
 
-  #hero .mb-6 {
-    margin-bottom: 1rem !important;
+  #hero .max-w-6xl {
+    padding-left: var(--space-md) !important;
+    padding-right: var(--space-md) !important;
   }
 
   /* Make CTA buttons stack nicely */
   #hero .flex-wrap {
-    gap: 0.5rem !important;
+    gap: 0.625rem !important;
   }
 
   #hero .flex-wrap a {
     font-size: 0.8125rem !important;
-    padding: 0.625rem 1rem !important;
+    padding: 0.625rem 1.125rem !important;
   }
 
-  /* Dashboard preview card — make more compact */
+  /* Dashboard preview card — more compact */
   #hero .shadow-xl {
     padding: 1rem !important;
   }
@@ -895,17 +945,13 @@ header.border-b {
     font-size: clamp(1.5rem, 5vw, 2rem) !important;
   }
 
-  #about .mb-4 {
-    margin-bottom: 0.5rem !important;
-  }
-
   #about .space-y-4 > :not([hidden]) ~ :not([hidden]) {
-    margin-top: 0.5rem !important;
+    margin-top: 0.625rem !important;
   }
 
   /* Core Skills & Who I Work With cards — compact */
   #about .p-4.rounded-xl {
-    padding: 0.75rem !important;
+    padding: 0.875rem !important;
   }
 
   /* ── TECH STACK — 2x2 CAROUSEL ── */
@@ -919,15 +965,8 @@ header.border-b {
     position: relative;
   }
 
-  /* Hide all cards beyond the first 4 visible ones */
   #tech-stack-grid > div {
     min-height: 0 !important;
-  }
-
-
-
-  /* Compact tech stack card sizing */
-  #tech-stack-grid > div {
     padding: 0.5rem !important;
     gap: 0.25rem !important;
   }
@@ -939,7 +978,7 @@ header.border-b {
   }
 
   #tech-stack-grid > div span {
-    font-size: 0.6875rem !important;
+    font-size: 0.75rem !important;
   }
 
   /* Tech stack carousel navigation dots */
@@ -975,11 +1014,11 @@ header.border-b {
 
   #services .grid {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 0.5rem !important;
+    gap: 0.625rem !important;
   }
 
   #services .p-6 {
-    padding: 0.75rem !important;
+    padding: 0.875rem !important;
   }
 
   /* Smaller service card icons */
@@ -1000,8 +1039,8 @@ header.border-b {
   }
 
   #services .text-sm {
-    font-size: 0.6875rem !important;
-    line-height: 1.4 !important;
+    font-size: 0.75rem !important;
+    line-height: 1.45 !important;
   }
 
   /* ── PROCESS SECTION — 2x2 grid ── */
@@ -1016,17 +1055,17 @@ header.border-b {
 
   #process .grid {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 0.5rem !important;
+    gap: 0.625rem !important;
   }
 
   #process .p-6 {
-    padding: 0.75rem !important;
+    padding: 0.875rem !important;
   }
 
   #process .w-12 {
-    width: 2rem !important;
-    height: 2rem !important;
-    font-size: 0.75rem !important;
+    width: 2.25rem !important;
+    height: 2.25rem !important;
+    font-size: 0.8125rem !important;
     margin-bottom: 0.5rem !important;
   }
 
@@ -1036,8 +1075,8 @@ header.border-b {
   }
 
   #process .text-xs {
-    font-size: 0.6875rem !important;
-    line-height: 1.4 !important;
+    font-size: 0.75rem !important;
+    line-height: 1.45 !important;
   }
 
   /* ── CASE STUDIES — Horizontal carousel ── */
@@ -1051,6 +1090,8 @@ header.border-b {
     scroll-snap-type: x mandatory !important;
     gap: 0.75rem !important;
     padding-bottom: 1rem !important;
+    scroll-padding-left: 5vw;
+    scroll-padding-right: 5vw;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
@@ -1065,34 +1106,34 @@ header.border-b {
   }
 
   #case-studies article {
-    flex: 0 0 85vw !important;
+    flex: 0 0 88vw !important;
     scroll-snap-align: center !important;
-    padding: 1rem !important;
+    padding: 1.125rem !important;
   }
 
   #case-studies article h3 {
-    font-size: 0.875rem !important;
-    margin-bottom: 0.5rem !important;
+    font-size: 0.9375rem !important;
+    margin-bottom: 0.625rem !important;
   }
 
   #case-studies .grid.md\:grid-cols-3 {
     grid-template-columns: 1fr !important;
-    gap: 0.5rem !important;
+    gap: 0.625rem !important;
   }
 
   #case-studies h4 {
-    font-size: 0.75rem !important;
+    font-size: 0.8125rem !important;
   }
 
   #case-studies .text-sm {
-    font-size: 0.75rem !important;
-    line-height: 1.4 !important;
+    font-size: 0.8125rem !important;
+    line-height: 1.5 !important;
   }
 
-  /* Outcome badges — smaller */
+  /* Outcome badges — slightly larger for readability */
   #case-studies .rounded-full {
     font-size: 9px !important;
-    padding: 2px 6px !important;
+    padding: 3px 8px !important;
   }
 
   /* Case studies scroll indicator */
@@ -1101,9 +1142,9 @@ header.border-b {
     justify-content: center;
     align-items: center;
     gap: 6px;
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
     color: var(--text-muted);
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
   }
 
   .case-studies-scroll-hint svg {
@@ -1124,7 +1165,7 @@ header.border-b {
     display: flex !important;
     overflow-x: auto !important;
     scroll-snap-type: x mandatory !important;
-    gap: 0.5rem !important;
+    gap: 0.625rem !important;
     padding-bottom: 0.75rem !important;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
@@ -1135,13 +1176,14 @@ header.border-b {
   }
 
   #testimonials .p-5 {
-    flex: 0 0 82vw !important;
+    flex: 0 0 84vw !important;
     scroll-snap-align: center !important;
-    padding: 0.75rem !important;
+    padding: 1rem !important;
   }
 
   #testimonials .text-sm {
     font-size: 0.8125rem !important;
+    line-height: 1.55 !important;
   }
 
   /* ── FAQ — Accordion style ── */
@@ -1160,7 +1202,7 @@ header.border-b {
 
   /* FAQ cards become compact accordion items */
   #faq .p-5.rounded-2xl {
-    padding: 0.75rem 1rem !important;
+    padding: 0.875rem 1rem !important;
     border-radius: 0 !important;
     border-left: none !important;
     border-right: none !important;
@@ -1168,27 +1210,36 @@ header.border-b {
     border-top: none !important;
   }
 
-  #faq .space-y-4 > div:first-child .p-5.rounded-2xl {
+  /* First item gets top border + rounded top corners */
+  #faq .space-y-4:first-child > .faq-item:first-child .p-5.rounded-2xl {
     border-top: 1px solid var(--border-default) !important;
+    border-top-left-radius: 12px !important;
+    border-top-right-radius: 12px !important;
   }
 
-  /* FAQ answer text — collapsed by default via JS */
+  /* Last item gets rounded bottom corners */
+  #faq .space-y-4:last-child > .faq-item:last-child .p-5.rounded-2xl {
+    border-bottom-left-radius: 12px !important;
+    border-bottom-right-radius: 12px !important;
+  }
+
+  /* FAQ answer text */
   #faq .p-5.rounded-2xl .text-sm {
     font-size: 0.8125rem !important;
-    line-height: 1.5 !important;
+    line-height: 1.55 !important;
   }
 
   /* FAQ accordion toggle icon */
   .faq-toggle-icon {
     display: inline-flex !important;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
     color: var(--neon-cyan);
     transition: transform var(--transition-smooth);
-    font-size: 1rem;
+    font-size: 1.125rem;
     font-weight: 300;
   }
 
@@ -1242,17 +1293,18 @@ header.border-b {
   }
 
   #contact .gap-10 {
-    gap: 1rem !important;
+    gap: 1.25rem !important;
   }
 
-  /* Make long URLs wrap */
+  /* Fix long URL wrapping — use overflow-wrap instead of word-break */
   #contact .space-y-2 p {
-    word-break: break-all;
-    font-size: 0.75rem !important;
+    overflow-wrap: break-word;
+    word-break: normal !important;
+    font-size: 0.8125rem !important;
   }
 
   #contact .p-5 {
-    padding: 0.75rem !important;
+    padding: 0.875rem !important;
   }
 
   /* ── CHATBOT WIDGET ── */
@@ -1269,7 +1321,7 @@ header.border-b {
 
   #chatbot-window {
     width: calc(100vw - 2rem) !important;
-    height: 400px !important;
+    height: 420px !important;
     position: fixed !important;
     bottom: 4.5rem !important;
     right: 1rem !important;
@@ -1277,22 +1329,140 @@ header.border-b {
 
   /* ── COOKIE BANNER ── */
   #cookie-banner .text-sm {
-    font-size: 0.75rem !important;
+    font-size: 0.8125rem !important;
   }
 
   #cookie-banner .gap-4 {
-    gap: 0.5rem !important;
+    gap: 0.625rem !important;
   }
 
   #cookie-banner .py-4 {
-    padding-top: 0.5rem !important;
-    padding-bottom: 0.5rem !important;
+    padding-top: 0.625rem !important;
+    padding-bottom: 0.625rem !important;
   }
 
   /* ── FOOTER ── */
   footer .py-6 {
     padding-top: 1rem !important;
     padding-bottom: 1rem !important;
+  }
+
+  footer .text-xs {
+    font-size: 0.75rem !important;
+    text-align: center;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   TABLET RESPONSIVE OPTIMIZATIONS
+   Targets: 768px – 1024px
+   Brand guide: 8-column layout, balanced density
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+  /* ── Section vertical rhythm: 64px ── */
+  section > div[class*="py-16"],
+  section > div[class*="py-20"] {
+    padding-top: var(--space-3xl) !important;
+    padding-bottom: var(--space-3xl) !important;
+  }
+
+  /* ── Container padding ── */
+  #hero .max-w-6xl,
+  #about .max-w-6xl,
+  #services .max-w-6xl,
+  #case-studies .max-w-6xl,
+  #testimonials .max-w-6xl,
+  #faq .max-w-6xl,
+  #contact .max-w-6xl,
+  #roi-calculator .max-w-4xl {
+    padding-left: var(--space-xl) !important;
+    padding-right: var(--space-xl) !important;
+  }
+
+  /* ── Hero ── */
+  #hero h1 {
+    font-size: clamp(2rem, 4.5vw, 2.75rem) !important;
+  }
+
+  #hero .grid.md\:grid-cols-2 {
+    gap: var(--space-xl) !important;
+  }
+
+  /* ── Services → 2-column grid ── */
+  #services .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--space-md) !important;
+  }
+
+  #services .p-6 {
+    padding: var(--space-lg) !important;
+  }
+
+  /* ── Process → 2x2 grid ── */
+  #process .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--space-md) !important;
+  }
+
+  /* Hide the connecting line on tablet (it's designed for 4-across) */
+  #process .hidden.md\:block {
+    display: none !important;
+  }
+
+  #process .p-6 {
+    padding: var(--space-lg) !important;
+  }
+
+  /* ── Case Studies — vertical stack with proper spacing ── */
+  #case-studies .space-y-8 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: var(--space-lg) !important;
+  }
+
+  #case-studies article {
+    padding: var(--space-lg) !important;
+  }
+
+  /* ── Testimonials — 2 column ── */
+  #testimonials .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: var(--space-md) !important;
+  }
+
+  #testimonials .p-5 {
+    padding: var(--space-lg) !important;
+  }
+
+  /* ── FAQ — 2-column ── */
+  #faq .grid {
+    gap: var(--space-md) !important;
+  }
+
+  /* ── ROI Calculator ── */
+  #roi-calculator .p-8 {
+    padding: var(--space-lg) !important;
+  }
+
+  /* ── Contact — side by side with balanced gaps ── */
+  #contact .grid {
+    gap: var(--space-xl) !important;
+  }
+
+  #contact .p-5 {
+    padding: var(--space-lg) !important;
+  }
+
+  /* ── Tech Stack on Tablet → 4 columns ── */
+  #tech-stack-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: var(--space-sm) !important;
+  }
+
+  /* ── About — tighter grid gap ── */
+  #about .grid {
+    gap: var(--space-xl) !important;
   }
 }
 
