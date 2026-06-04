@@ -669,8 +669,8 @@ Instructions:
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     
-    fbq('init', META_PIXEL_ID);
-    fbq('track', 'PageView');
+    window.fbq('init', META_PIXEL_ID);
+    window.fbq('track', 'PageView');
   }
 
   // Initialize tracking based on selections

@@ -1549,6 +1549,17 @@ input:disabled + .slider:before {
   box-shadow: none !important;
 }
 
+/* Cookie Banner animations and hiding state */
+#cookie-banner {
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1), opacity 400ms ease, visibility 400ms ease !important;
+}
+
+#cookie-banner.translate-y-full {
+  transform: translateY(150%) !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
 /* Modal and overlay animation behaviors */
 #cookie-modal-overlay {
   transition: opacity 300ms ease;
