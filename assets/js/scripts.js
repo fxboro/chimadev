@@ -731,6 +731,12 @@ Instructions:
     // Wait for the transition to finish before hiding display
     setTimeout(() => {
       modalOverlay.classList.add('hidden');
+      
+      // If they haven't saved any preferences yet, show the bottom banner instead
+      const consentPrefs = localStorage.getItem('chimadev_cookie_consent_prefs');
+      if (!consentPrefs && cookieBanner) {
+        cookieBanner.classList.remove('translate-y-full');
+      }
     }, 300);
     
     document.removeEventListener('keydown', trapModalKey);
@@ -772,9 +778,9 @@ Instructions:
     if (consentPrefs) {
       initTracking(JSON.parse(consentPrefs));
     } else {
-      // Show banner after 1s delay
+      // Show preference modal directly after 1s delay for first-time visitors
       setTimeout(() => {
-        cookieBanner.classList.remove('translate-y-full');
+        openPreferencesModal();
       }, 1000);
     }
     
