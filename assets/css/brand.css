@@ -1594,3 +1594,40 @@ input:disabled + .slider:before {
     padding: 1.25rem !important;
   }
 }
+
+/* Compact Cookie Banner on Desktop & Tablet */
+@media (min-width: 768px) {
+  #cookie-banner {
+    bottom: 1.5rem !important;
+    left: 1.5rem !important;
+    width: 380px !important;
+    border-radius: 16px !important;
+    border: 1px solid var(--border-default) !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 
+                0 8px 10px -6px rgba(0, 0, 0, 0.5), 
+                0 0 20px rgba(123, 63, 242, 0.15) !important;
+  }
+  
+  #cookie-banner > div {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    padding: 1.25rem !important;
+    gap: 0.875rem !important;
+  }
+  
+  #cookie-banner .text-sm {
+    text-align: left !important;
+    line-height: 1.5 !important;
+  }
+  
+  #cookie-banner .flex-wrap {
+    justify-content: flex-end !important;
+    width: 100% !important;
+    gap: 0.5rem !important;
+  }
+  
+  #cookie-banner button {
+    font-size: 0.75rem !important;
+    padding: 0.5rem 1rem !important;
+  }
+}
