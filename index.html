@@ -1068,7 +1068,7 @@
   <footer class="border-t border-slate-800 bg-slate-950">
     <div
       class="max-w-6xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-500">
-      <p>© <span id="year"></span> Chima.dev — Software, Web, AI & Workflows.</p>
+      <p>© <span id="year"></span> Chima.dev — Software, Web, AI & Workflows. | <button id="open-cookie-settings" class="hover:underline hover:text-cyan-400 transition bg-transparent border-none p-0 text-slate-500 cursor-pointer align-baseline">Cookie Settings</button></p>
       <p>Built with HTML, Tailwind, raw Javascript, and a little bit of automation magic.</p>
     </div>
   </footer>
@@ -1136,11 +1136,93 @@
           <a href="#" class="text-cyan-400 hover:text-cyan-300 underline underline-offset-2">Privacy Policy</a>.
         </p>
       </div>
-      <div class="flex items-center gap-3 w-full md:w-auto shrink-0">
+      <div class="flex flex-wrap items-center gap-3 w-full md:w-auto shrink-0">
+        <button id="cookie-manage" class="flex-1 md:flex-none px-4 py-2 rounded-lg border border-slate-700 text-slate-300 text-sm font-semibold hover:bg-slate-800 transition">
+          Preferences
+        </button>
         <button id="cookie-reject" class="flex-1 md:flex-none px-4 py-2 rounded-lg border border-slate-700 text-slate-300 text-sm font-semibold hover:bg-slate-800 transition">
           Decline
         </button>
         <button id="cookie-accept" class="flex-1 md:flex-none px-4 py-2 rounded-lg bg-cyan-400 text-slate-950 text-sm font-semibold hover:bg-cyan-300 transition">
+          Accept All
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cookie Preferences Modal -->
+  <div id="cookie-modal-overlay" class="fixed inset-0 z-[70] hidden bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300 opacity-0" aria-hidden="true">
+    <div id="cookie-modal" class="bg-slate-900 border border-slate-800 rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden transform scale-95 opacity-0 transition-all duration-300" role="dialog" aria-modal="true" aria-labelledby="cookie-modal-title">
+      <!-- Header -->
+      <div class="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-900/45">
+        <h3 id="cookie-modal-title" class="text-lg font-bold text-slate-50 font-mono">Cookie Preferences</h3>
+        <button id="cookie-modal-close" class="text-slate-400 hover:text-slate-200 text-2xl leading-none transition" aria-label="Close preferences modal">&times;</button>
+      </div>
+      
+      <!-- Body -->
+      <div class="p-6 space-y-5 max-h-[60vh] overflow-y-auto">
+        <p class="text-xs text-slate-300 leading-relaxed">
+          We use cookies and other tracking technologies to improve your experience on our website. You can customize which tracking categories you authorize below.
+        </p>
+        
+        <div class="space-y-4">
+          <!-- Necessary -->
+          <div class="flex items-start justify-between gap-4 p-4 rounded-xl bg-slate-950/40 border border-slate-800/60">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <h4 class="text-sm font-semibold text-slate-100">Strictly Necessary</h4>
+                <span class="px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 text-[9px] uppercase font-bold tracking-wider">Required</span>
+              </div>
+              <p class="text-xs text-slate-400 leading-relaxed">Essential for security, basic routing, page performance, and retaining your consent preferences.</p>
+            </div>
+            <div class="shrink-0 pt-1">
+              <label class="switch">
+                <input type="checkbox" id="pref-necessary" checked disabled aria-label="Necessary cookies (always enabled)">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Analytics -->
+          <div class="flex items-start justify-between gap-4 p-4 rounded-xl bg-slate-950/40 border border-slate-800/60">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <h4 class="text-sm font-semibold text-slate-100">Analytics & Performance</h4>
+              </div>
+              <p class="text-xs text-slate-400 leading-relaxed">Allows us to analyze site visitor traffic and optimize layouts (integrates with Google Tag Manager).</p>
+            </div>
+            <div class="shrink-0 pt-1">
+              <label class="switch">
+                <input type="checkbox" id="pref-analytics" aria-label="Toggle analytics cookies">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Marketing -->
+          <div class="flex items-start justify-between gap-4 p-4 rounded-xl bg-slate-950/40 border border-slate-800/60">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <h4 class="text-sm font-semibold text-slate-100">Marketing & Personalization</h4>
+              </div>
+              <p class="text-xs text-slate-400 leading-relaxed">Enables behavior tracking ("tract data") to evaluate promotions and customize services (integrates with Meta Pixel).</p>
+            </div>
+            <div class="shrink-0 pt-1">
+              <label class="switch">
+                <input type="checkbox" id="pref-marketing" aria-label="Toggle marketing cookies">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Footer -->
+      <div class="p-6 border-t border-slate-800 bg-slate-900/60 flex items-center justify-end gap-3">
+        <button id="cookie-save-choices" class="px-5 py-2.5 rounded-full border border-slate-700 text-slate-300 text-sm font-semibold hover:bg-slate-850 hover:border-slate-500 transition">
+          Save Choices
+        </button>
+        <button id="cookie-accept-all-modal" class="px-5 py-2.5 rounded-full bg-cyan-400 text-slate-950 text-sm font-semibold hover:bg-cyan-300 transition">
           Accept All
         </button>
       </div>

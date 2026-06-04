@@ -618,46 +618,233 @@ Instructions:
   }
 
   // ── COOKIE CONSENT & TRACKING ──
+  // Container IDs (placeholders to be set by owner)
+  const GTM_CONTAINER_ID = 'GTM-PLACEHOLDER';
+  const META_PIXEL_ID = 'PIXEL-PLACEHOLDER';
+
   const cookieBanner = document.getElementById('cookie-banner');
   const btnAccept = document.getElementById('cookie-accept');
   const btnReject = document.getElementById('cookie-reject');
+  const btnManage = document.getElementById('cookie-manage');
 
-  function initTracking() {
-    // Insert your tracking codes (e.g., Google Analytics, Meta Pixel) here
-    console.log("Tracking initialized. User accepted cookies.");
+  // Modal elements
+  const modalOverlay = document.getElementById('cookie-modal-overlay');
+  const modalContainer = document.getElementById('cookie-modal');
+  const btnModalClose = document.getElementById('cookie-modal-close');
+  const btnSaveChoices = document.getElementById('cookie-save-choices');
+  const btnAcceptAllModal = document.getElementById('cookie-accept-all-modal');
+  const footerSettingsBtn = document.getElementById('open-cookie-settings');
 
-    // Example for GA4:
-    // const script = document.createElement('script');
-    // script.src = 'https://www.googletagmanager.com/gtag/js?id=YOUR-GA-ID';
-    // script.async = true;
-    // document.head.appendChild(script);
-    // window.dataLayer = window.dataLayer || [];
-    // function gtag(){dataLayer.push(arguments);}
-    // gtag('js', new Date());
-    // gtag('config', 'YOUR-GA-ID');
+  // Checkboxes
+  const prefNecessary = document.getElementById('pref-necessary');
+  const prefAnalytics = document.getElementById('pref-analytics');
+  const prefMarketing = document.getElementById('pref-marketing');
+
+  // Load tracker scripts dynamically
+  function loadGTM() {
+    if (window.gtm_loaded) return;
+    window.gtm_loaded = true;
+    console.log(`[Cookie Manager] Dynamic GTM Initialized with ID: ${GTM_CONTAINER_ID}`);
+    
+    // GTM Standard Script Injection
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer',GTM_CONTAINER_ID);
   }
 
-  if (cookieBanner && btnAccept && btnReject) {
-    const consent = localStorage.getItem('chimadev_cookie_consent');
+  function loadMetaPixel() {
+    if (window.pixel_loaded) return;
+    window.pixel_loaded = true;
+    console.log(`[Cookie Manager] Dynamic Meta Pixel Initialized with ID: ${META_PIXEL_ID}`);
 
-    if (consent === 'accepted') {
-      initTracking();
-    } else if (!consent) {
-      // Show banner after a slight delay
+    // Meta Pixel standard script injection
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    
+    fbq('init', META_PIXEL_ID);
+    fbq('track', 'PageView');
+  }
+
+  // Initialize tracking based on selections
+  function initTracking(prefs) {
+    if (!prefs) return;
+    console.log("[Cookie Manager] Processing consent categories:", prefs);
+    
+    if (prefs.analytics) {
+      loadGTM();
+    }
+    if (prefs.marketing) {
+      loadMetaPixel();
+    }
+  }
+
+  // Save selection and update tracking
+  function saveConsentPreferences(prefs) {
+    localStorage.setItem('chimadev_cookie_consent_prefs', JSON.stringify(prefs));
+    // Also save legacy key for backward compatibility or simple presence checks
+    localStorage.setItem('chimadev_cookie_consent', prefs.analytics || prefs.marketing ? 'accepted' : 'rejected');
+    
+    initTracking(prefs);
+  }
+
+  // Modal open / close logic with transitions
+  function openPreferencesModal() {
+    if (!modalOverlay || !modalContainer) return;
+    
+    // Load current choices from local storage (or default to unchecked)
+    const storedPrefs = JSON.parse(localStorage.getItem('chimadev_cookie_consent_prefs') || '{}');
+    if (prefAnalytics) prefAnalytics.checked = !!storedPrefs.analytics;
+    if (prefMarketing) prefMarketing.checked = !!storedPrefs.marketing;
+    
+    // Reveal overlay
+    modalOverlay.classList.remove('hidden');
+    // Force a browser paint flow before adding opacity to trigger transition
+    void modalOverlay.offsetHeight;
+    modalOverlay.classList.add('opacity-100');
+    modalContainer.classList.add('modal-active');
+    
+    // Accessibility attributes
+    modalOverlay.setAttribute('aria-hidden', 'false');
+    
+    // Focus close button first
+    if (btnModalClose) btnModalClose.focus();
+    
+    // Trap focus in modal
+    document.addEventListener('keydown', trapModalKey);
+  }
+
+  function closePreferencesModal() {
+    if (!modalOverlay || !modalContainer) return;
+    
+    modalOverlay.classList.remove('opacity-100');
+    modalContainer.classList.remove('modal-active');
+    modalOverlay.setAttribute('aria-hidden', 'true');
+    
+    // Wait for the transition to finish before hiding display
+    setTimeout(() => {
+      modalOverlay.classList.add('hidden');
+    }, 300);
+    
+    document.removeEventListener('keydown', trapModalKey);
+  }
+
+  function trapModalKey(e) {
+    if (!modalOverlay || modalOverlay.classList.contains('hidden')) return;
+    
+    if (e.key === 'Escape') {
+      closePreferencesModal();
+      return;
+    }
+    
+    if (e.key !== 'Tab') return;
+    
+    // Get all focusable elements inside the modal
+    const focusable = Array.from(modalContainer.querySelectorAll('a, button, input[type="checkbox"]:not([disabled])')).filter(el => !el.hasAttribute('disabled'));
+    if (!focusable.length) {
+      e.preventDefault();
+      return;
+    }
+    
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+
+  // Setup Event Listeners
+  if (cookieBanner) {
+    const consentPrefs = localStorage.getItem('chimadev_cookie_consent_prefs');
+    
+    if (consentPrefs) {
+      initTracking(JSON.parse(consentPrefs));
+    } else {
+      // Show banner after 1s delay
       setTimeout(() => {
         cookieBanner.classList.remove('translate-y-full');
       }, 1000);
     }
+    
+    // Accept All from banner
+    if (btnAccept) {
+      btnAccept.addEventListener('click', () => {
+        const prefs = { necessary: true, analytics: true, marketing: true };
+        saveConsentPreferences(prefs);
+        cookieBanner.classList.add('translate-y-full');
+      });
+    }
+    
+    // Decline All from banner (sets non-essential to false)
+    if (btnReject) {
+      btnReject.addEventListener('click', () => {
+        const prefs = { necessary: true, analytics: false, marketing: false };
+        saveConsentPreferences(prefs);
+        cookieBanner.classList.add('translate-y-full');
+      });
+    }
+    
+    // Preferences button from banner
+    if (btnManage) {
+      btnManage.addEventListener('click', () => {
+        openPreferencesModal();
+      });
+    }
+  }
 
-    btnAccept.addEventListener('click', () => {
-      localStorage.setItem('chimadev_cookie_consent', 'accepted');
-      cookieBanner.classList.add('translate-y-full');
-      initTracking();
+  // Modal actions
+  if (btnModalClose) {
+    btnModalClose.addEventListener('click', closePreferencesModal);
+  }
+  
+  if (modalOverlay) {
+    // Click outside to close (only on overlay, not modal box)
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        closePreferencesModal();
+      }
     });
-
-    btnReject.addEventListener('click', () => {
-      localStorage.setItem('chimadev_cookie_consent', 'rejected');
-      cookieBanner.classList.add('translate-y-full');
+  }
+  
+  if (btnSaveChoices) {
+    btnSaveChoices.addEventListener('click', () => {
+      const prefs = {
+        necessary: true,
+        analytics: prefAnalytics ? prefAnalytics.checked : false,
+        marketing: prefMarketing ? prefMarketing.checked : false
+      };
+      saveConsentPreferences(prefs);
+      closePreferencesModal();
+      if (cookieBanner) cookieBanner.classList.add('translate-y-full');
+    });
+  }
+  
+  if (btnAcceptAllModal) {
+    btnAcceptAllModal.addEventListener('click', () => {
+      const prefs = { necessary: true, analytics: true, marketing: true };
+      saveConsentPreferences(prefs);
+      closePreferencesModal();
+      if (cookieBanner) cookieBanner.classList.add('translate-y-full');
+    });
+  }
+  
+  // Footer settings link to reopen modal
+  if (footerSettingsBtn) {
+    footerSettingsBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openPreferencesModal();
     });
   }
 
