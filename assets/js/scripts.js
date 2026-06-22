@@ -394,7 +394,7 @@ Services:
 5. Workflow Optimization: Automating back-office chaos.
 Process: Audit & Discovery -> Architecture -> Build & Automate -> Launch & Scale.
 Pricing: Focused on saving money. Uses an ROI calculator.
-Contact: hallo@chimadev.com
+Contact: dayo@chimadev.com
 FAQs:
 - Works with non-techies? Yes.
 - Fast? Simple sites 2-3 weeks.
@@ -403,7 +403,7 @@ FAQs:
 Instructions:
 - Keep answers very short and conversational (1-3 sentences max).
 - Match the requested tone exactly based on user prompt context.
-- Always be helpful, point them to hallo@chimadev.com for complex requests.
+- Always be helpful, point them to dayo@chimadev.com for complex requests.
 - DO NOT invent information.
 `;
 
@@ -447,7 +447,7 @@ Instructions:
         console.error("Chatbot API Error:", err);
         // Pop the user message if it failed, so they can try again
         chatSessionHistory.pop();
-        return "Oops, my circuits got crossed. Please email Chima at hallo@chimadev.com instead!";
+        return "Oops, my circuits got crossed. Please email Chima at dayo@chimadev.com instead!";
       }
     }
 
