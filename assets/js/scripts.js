@@ -438,7 +438,11 @@ Instructions:
         }
 
         const data = await response.json();
-        const replyText = data.candidates[0].content.parts[0].text;
+        const replyText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+        
+        if (!replyText) {
+          throw new Error("Invalid API response format or safety block.");
+        }
         
         chatSessionHistory.push({ role: "model", parts: [{ text: replyText }] });
         
@@ -511,7 +515,7 @@ Instructions:
   function calculateROI() {
     if (!hoursInput || !rateInput || !hoursVal || !annualLossText || !weeksLostElem) return;
 
-    const hours = parseInt(hoursInput.value);
+    const hours = parseInt(hoursInput.value) || 0;
     const rate = parseInt(rateInput.value) || 0;
 
     hoursVal.textContent = hours + (hours >= 40 ? 'h+' : 'h');
