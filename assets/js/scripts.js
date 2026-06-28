@@ -513,6 +513,17 @@ Instructions:
     });
   }
 
+  // ── FAQ Accordion ──
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+      const faqItem = question.closest('.faq-item');
+      if (faqItem) {
+        faqItem.classList.toggle('open');
+      }
+    });
+  });
+
   // ── ROI Calculator Logic ──
   const hoursInput = document.getElementById('manual-hours');
   const rateInput = document.getElementById('hourly-rate');
