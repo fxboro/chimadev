@@ -73,6 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mobileClose) mobileClose.addEventListener('click', closeMobileNav);
   if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileNav);
 
+  // Close mobile nav when clicking a link
+  if (mobileNav) {
+    const mobileLinks = mobileNav.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', closeMobileNav);
+    });
+  }
+
 
 
   // ── Scroll-based Navigation ──
