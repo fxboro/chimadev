@@ -7,46 +7,107 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
     content="Web design, app development, AI automation, and workflow optimization for small businesses, solo entrepreneurs, and influencers." />
+  <link rel="canonical" href="https://chima.dev/" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Chima",
-    "url": "https://chima.dev",
-    "jobTitle": "Web Developer & AI Automation Specialist",
-    "description": "Expert in web design, AI automation, and workflow optimization for small businesses.",
-    "knowsAbout": ["Web Development", "AI Automation", "Workflow Optimization", "Python", "JavaScript", "Stripe Integration"],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Services",
-      "itemListElement": [
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Design & Redesign" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "App Development" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Automation & Chatbots" } }
-      ]
-    }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
+    "@graph": [
       {
-        "@type": "Question",
-        "name": "Do you only work with techies?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Not at all. Most of my clients are small business owners and influencers who just want their tech to work."
+        "@type": "Person",
+        "@id": "https://chima.dev/#person",
+        "name": "Chima",
+        "url": "https://chima.dev",
+        "jobTitle": "Web Developer & AI Automation Specialist",
+        "description": "Expert in web design, AI automation, and workflow optimization for small businesses.",
+        "knowsAbout": ["Web Development", "AI Automation", "Workflow Optimization", "Python", "JavaScript", "Stripe Integration"],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Services",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Web Design & Redesign" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "App Development" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Automation & Chatbots" } }
+          ]
         }
       },
       {
-        "@type": "Question",
-        "name": "How fast can you build my site?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Simple sites can be ready in 2-3 weeks. Complex apps + automation take longer, but I keep you updated every step of the way."
+        "@type": "ProfessionalService",
+        "@id": "https://chima.dev/#service",
+        "name": "ChimaDev",
+        "url": "https://chima.dev",
+        "logo": "https://chima.dev/assets/logo.png",
+        "image": "https://chima.dev/assets/og-image.png",
+        "description": "Sleek, high-performance web development and custom AI integrations for small businesses and influencers.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "Germany"
+        },
+        "founder": {
+          "@id": "https://chima.dev/#person"
         }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://chima.dev/#website",
+        "url": "https://chima.dev",
+        "name": "Chima.dev",
+        "publisher": {
+          "@id": "https://chima.dev/#person"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://chima.dev/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do you only work with techies?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Not at all. Most of my clients are small business owners and influencers who just want their tech to work."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How fast can you build my site?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Simple sites can be ready in 2-3 weeks. Complex apps + automation take longer, but I keep you updated every step of the way."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will AI replace me?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nope. AI is here to assist. I use it to handle the boring stuff so you can focus on being human."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is this going to cost me a fortune?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "I tailor solutions to fit small business budgets. No enterprise-only sticker shock here—just value for your sanity."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you make my brand look cooler?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Absolutely. Sleek redesigns are my bread and butter. I'll make sure you look sharp enough to impress competitors."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens after launch?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "I don’t just vanish. I offer ongoing support and optimization so your site keeps evolving with your business."
+            }
+          }
+        ]
       }
     ]
   }
@@ -54,6 +115,7 @@
   <audio id="typing-sound" src="https://assets.mixkit.co/sfx/preview/mixkit-soft-fast-typing-2584.mp3"></audio>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="stylesheet" href="assets/css/brand.css" />
   <!-- SEO / Social Sharing -->

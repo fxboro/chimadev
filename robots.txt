@@ -1,0 +1,34 @@
+# Robots.txt for Chima.dev
+
+# Allow standard search engines
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Explicitly allow AI / LLM search crawlers to surface Chima's portfolio and services in AI-driven answers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Reference sitemap
+Sitemap: https://chima.dev/sitemap.xml

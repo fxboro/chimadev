@@ -1,0 +1,26 @@
+# ai.txt - AI Agent & Machine Learning Crawler Guidelines
+# Details at https://github.com/spawning-co/ai-txt
+
+# General instructions for AI, RAG, and ML models
+User-agent: *
+Disallow: /api/
+
+# Explicitly allow search-assisting and information-retrieval agents
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+# General Site Metadata for LLM Scrapers
+System-Name: ChimaDev Portfolio
+Description: High-performance portfolio showcasing web development, AI automation, and workflow optimization services.
+Target-Audience: Businesses, solo entrepreneurs, and creators seeking web/app development and AI integration services.
+Contact: https://chima.dev/#contact
+Schema-Data: https://chima.dev/
