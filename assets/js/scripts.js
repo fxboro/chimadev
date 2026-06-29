@@ -881,25 +881,62 @@ Instructions:
   // MOBILE-ONLY INTERACTIVE FEATURES
   // Only activate on viewports < 768px
   // ═══════════════════════════════════════════════════════════
-  const isMobile = window.matchMedia('(max-width: 767px)');
+  const isMobile = window.matchMedia("(max-width: 767px)");
+  let techCarouselInterval = null;
+  let mobileListenersAttached = false;
+  let hasScrolledCaseStudies = false;
 
-  function initMobileFeatures() {
-    if (!isMobile.matches) return;
+  // Cache elements
+  const techGrid = document.getElementById('tech-stack-grid');
+  const carouselNav = document.querySelector('.tech-carousel-nav');
+  const faqItems = document.querySelectorAll('.faq-item');
+  const swipeHint = document.querySelector('.case-studies-scroll-hint');
+  const caseContainer = document.querySelector('#case-studies .space-y-8');
 
-    // ── Tech Stack Carousel (2x2 pages) ──
-    const techGrid = document.getElementById('tech-stack-grid');
-    const carouselNav = document.querySelector('.tech-carousel-nav');
+  let allCards = [];
+  let currentPage = 0;
+  let totalPages = 0;
+  const CARDS_PER_PAGE = 4;
 
+  if (techGrid && carouselNav) {
+    allCards = Array.from(techGrid.children);
+    totalPages = Math.ceil(allCards.length / CARDS_PER_PAGE);
+  }
+
+  function showTechPage(page) {
+    currentPage = page;
+    allCards.forEach((card, idx) => {
+      const cardPage = Math.floor(idx / CARDS_PER_PAGE);
+      card.style.display = cardPage === page ? '' : 'none';
+    });
+
+    if (carouselNav) {
+      carouselNav.querySelectorAll('.tech-carousel-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === page);
+      });
+    }
+  }
+
+  function startTechCarousel() {
+    if (techCarouselInterval) clearInterval(techCarouselInterval);
+    techCarouselInterval = setInterval(() => {
+      showTechPage((currentPage + 1) % totalPages);
+    }, 5000);
+  }
+
+  function stopTechCarousel() {
+    if (techCarouselInterval) {
+      clearInterval(techCarouselInterval);
+      techCarouselInterval = null;
+    }
+  }
+
+  function setupMobileListenersOnce() {
+    if (mobileListenersAttached) return;
+
+    // -- Tech Stack Carousel Event Listeners --
     if (techGrid && carouselNav) {
-      const allCards = Array.from(techGrid.children);
-      const CARDS_PER_PAGE = 4;
-      const totalPages = Math.ceil(allCards.length / CARDS_PER_PAGE);
-      let currentPage = 0;
-
-      // Show nav dots
-      carouselNav.style.display = 'flex';
-
-      // Generate correct number of dots
+      // Generate dots once
       carouselNav.innerHTML = '';
       for (let i = 0; i < totalPages; i++) {
         const dot = document.createElement('button');
@@ -909,73 +946,52 @@ Instructions:
         carouselNav.appendChild(dot);
       }
 
-      function showPage(page) {
-        currentPage = page;
-        allCards.forEach((card, idx) => {
-          const cardPage = Math.floor(idx / CARDS_PER_PAGE);
-          card.style.display = cardPage === page ? '' : 'none';
-        });
-
-        // Update dots
-        carouselNav.querySelectorAll('.tech-carousel-dot').forEach((dot, i) => {
-          dot.classList.toggle('active', i === page);
-        });
-      }
-
-      // Show first page
-      showPage(0);
-
       // Dot click handlers
       carouselNav.addEventListener('click', (e) => {
+        if (!isMobile.matches) return;
         const dot = e.target.closest('.tech-carousel-dot');
         if (!dot) return;
-        showPage(parseInt(dot.dataset.page));
+        showTechPage(parseInt(dot.dataset.page));
       });
-
-      // Auto-cycle every 5 seconds
-      let carouselInterval = setInterval(() => {
-        showPage((currentPage + 1) % totalPages);
-      }, 5000);
 
       // Pause on interaction
       carouselNav.addEventListener('pointerdown', () => {
-        clearInterval(carouselInterval);
+        if (!isMobile.matches) return;
+        stopTechCarousel();
         // Resume after 10s
         setTimeout(() => {
-          carouselInterval = setInterval(() => {
-            showPage((currentPage + 1) % totalPages);
-          }, 5000);
+          if (isMobile.matches) {
+            startTechCarousel();
+          }
         }, 10000);
       });
 
       // Swipe support for tech stack
       let touchStartX = 0;
       techGrid.addEventListener('touchstart', (e) => {
+        if (!isMobile.matches) return;
         touchStartX = e.touches[0].clientX;
       }, { passive: true });
+
       techGrid.addEventListener('touchend', (e) => {
+        if (!isMobile.matches) return;
         const diff = touchStartX - e.changedTouches[0].clientX;
         if (Math.abs(diff) > 40) {
-          clearInterval(carouselInterval);
-          if (diff > 0 && currentPage < totalPages - 1) showPage(currentPage + 1);
-          else if (diff < 0 && currentPage > 0) showPage(currentPage - 1);
+          stopTechCarousel();
+          if (diff > 0 && currentPage < totalPages - 1) showTechPage(currentPage + 1);
+          else if (diff < 0 && currentPage > 0) showTechPage(currentPage - 1);
         }
       }, { passive: true });
     }
 
-    // ── FAQ Accordions ──
-    const faqItems = document.querySelectorAll('.faq-item');
+    // -- FAQ Accordions Event Listeners --
     if (faqItems.length > 0) {
-      // Show toggle icons on mobile
-      document.querySelectorAll('.faq-toggle-icon').forEach(icon => {
-        icon.style.display = '';
-      });
-
       faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
         if (!question) return;
 
         question.addEventListener('click', () => {
+          if (!isMobile.matches) return;
           const wasOpen = item.classList.contains('open');
 
           // Close all other items (accordion behavior)
@@ -989,16 +1005,62 @@ Instructions:
       });
     }
 
-    // ── Case Studies Swipe Hint ──
-    const swipeHint = document.querySelector('.case-studies-scroll-hint');
-    if (swipeHint) {
-      swipeHint.style.display = '';
+    // -- Case Studies Swipe Hint Event Listeners --
+    if (swipeHint && caseContainer) {
+      // Tap hint -> scroll to next case study card
+      swipeHint.addEventListener('click', () => {
+        if (!isMobile.matches) return;
+        const cards = Array.from(caseContainer.querySelectorAll('article'));
+        const containerRect = caseContainer.getBoundingClientRect();
+        const containerCenter = containerRect.left + containerRect.width / 2;
 
-      // Hide hint after first swipe
-      const caseContainer = document.querySelector('#case-studies .space-y-8');
+        // Find the first card whose left edge is past the container center (i.e. the next card)
+        const nextCard = cards.find(card => {
+          const cardRect = card.getBoundingClientRect();
+          return cardRect.left > containerCenter;
+        });
+
+        if (nextCard) {
+          nextCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        } else {
+          // If we're at the last card, wrap around to the first
+          cards[0]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      });
+    }
+
+    mobileListenersAttached = true;
+  }
+
+  function initMobileFeatures() {
+    if (!isMobile.matches) return;
+
+    setupMobileListenersOnce();
+
+    // Show tech carousel nav
+    if (carouselNav) {
+      carouselNav.style.display = 'flex';
+    }
+
+    // Reset cards to display page 0 and start auto-cycle
+    showTechPage(0);
+    startTechCarousel();
+
+    // Show FAQ toggle icons
+    document.querySelectorAll('.faq-toggle-icon').forEach(icon => {
+      icon.style.display = '';
+    });
+
+    // Show swipe hint if they haven't scrolled yet
+    if (swipeHint && !hasScrolledCaseStudies) {
+      swipeHint.classList.remove('hidden');
+
       if (caseContainer) {
+        // Hide hint after first manual swipe
         caseContainer.addEventListener('scroll', () => {
-          swipeHint.style.display = 'none';
+          if (!isMobile.matches) return;
+          swipeHint.classList.add('hidden');
+          hasScrolledCaseStudies = true;
         }, { once: true });
       }
     }
@@ -1019,16 +1081,19 @@ Instructions:
         document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('open'));
         document.querySelectorAll('.faq-toggle-icon').forEach(icon => icon.style.display = 'none');
 
-        const techGrid = document.getElementById('tech-stack-grid');
         if (techGrid) {
           Array.from(techGrid.children).forEach(card => card.style.display = '');
         }
 
-        const carouselNav = document.querySelector('.tech-carousel-nav');
-        if (carouselNav) carouselNav.style.display = 'none';
+        if (carouselNav) {
+          carouselNav.style.display = 'none';
+        }
 
-        const swipeHint = document.querySelector('.case-studies-scroll-hint');
-        if (swipeHint) swipeHint.style.display = 'none';
+        stopTechCarousel();
+
+        if (swipeHint) {
+          swipeHint.classList.add('hidden');
+        }
       }
     }, 200);
   });

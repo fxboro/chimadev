@@ -1146,6 +1146,18 @@ section .mb-12 {
     margin-top: 0.75rem;
     color: var(--text-muted);
     font-size: 0.75rem;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .case-studies-scroll-hint:active {
+    opacity: 0.6;
+  }
+
+  .case-studies-scroll-hint.hidden {
+    display: none !important;
   }
 
   .case-studies-scroll-hint svg {
